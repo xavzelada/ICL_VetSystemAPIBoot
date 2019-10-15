@@ -1,0 +1,489 @@
+databaseChangeLog:
+    - changeSet:
+        id: DatabaseCreation
+        author: xvasquez
+        changes:
+        #- sql: "CREATE SCHEMA vetsystem;"
+        - createTable:
+            #schemaName: vetsystem
+            tableName: Company
+            remarks: Table to store companies information
+            columns:
+            - column:
+                name: companyid
+                type: Integer
+                autoIncrement: true
+                constraints:
+                    primaryKey: true
+                    primaryKeyName: Company_pk
+            - column:
+                name: name
+                type: Varchar(128)
+                constraints:
+                    nullable: false
+            - column:
+                name: address
+                type: Varchar(1024)
+            - column:
+                name: logo
+                type: BLOB
+            - column:
+                name: isactive
+                type: Varchar(1)
+                constraints:
+                    nullable: false
+                defaultValue: 'A'
+            - column:
+                name: creationdate
+                type: Date
+                constraints:
+                    nullable: false
+                defaultValueComputed: current_timestamp
+            - column:
+                name: createdby
+                type: Varchar(25)
+                constraints:
+                    nullable: false
+                defaultValue: USER
+            - column:
+                name: lastupdate
+                type: Date
+            - column:
+                name: updateby
+                type: Varchar(25)
+        - createTable:
+            #schemaName: vetsystem
+            tableName: Branch
+            remarks: Table to store branchs information
+            columns:
+            - column:
+                name: branchid
+                type: Integer
+                autoIncrement: true
+                constraints:
+                    primaryKey: true
+                    primaryKeyName: branch_pk
+            - column:
+                name: companyid
+                type: Integer
+                constraints:
+                    foreignKey:
+                      referencedColumnNames: companyid
+                      referencedTableName: Company
+                    nullable: false
+            - column:
+                name: name
+                type: Varchar(128)
+                constraints:
+                    nullable: false
+            - column:
+                name: address
+                type: Varchar(1024)
+            - column:
+                name: location
+                type: Varchar(1024)
+            - column:
+                name: phonenumber1
+                type: Varchar(15)
+            - column:
+                name: phonenumber2
+                type: Varchar(15)
+            - column:
+                name: isactive
+                type: Varchar(1)
+                constraints:
+                    nullable: false
+                defaultValue: 'A'
+            - column:
+                name: creationdate
+                type: Date
+                constraints:
+                    nullable: false
+                defaultValueComputed: current_timestamp
+            - column:
+                name: createdby
+                type: Varchar(25)
+                constraints:
+                    nullable: false
+                defaultValue: USER
+            - column:
+                name: lastupdate
+                type: Date
+            - column:
+                name: updateby
+                type: Varchar(25)
+        - createTable:
+            #schemaName: vetsystem
+            tableName: employee
+            remarks: Table to store employees information
+            columns:
+            - column:
+                name: employeeid
+                type: Integer
+                autoIncrement: true
+                constraints:
+                    primaryKey: true
+                    primaryKeyName: employee_pk
+            - column:
+                name: branchid
+                type: Integer
+                constraints:
+                    foreignKey:
+                      referencedColumnNames: branchid
+                      referencedTableName: Branch
+                    nullable: false
+            - column:
+                name: name
+                type: Varchar(128)
+                constraints:
+                    nullable: false
+            - column:
+                name: surname
+                type: Varchar(128)
+                constraints:
+                    nullable: false
+            - column:
+                name: photo
+                type: BLOB
+            - column:
+                name: birthdate
+                type: Date
+            - column:
+                name: address
+                type: Varchar(1024)
+            - column:
+                name: phonenumber1
+                type: Varchar(15)
+            - column:
+                name: phonenumber2
+                type: Varchar(15)
+            - column:
+                name: personalemail
+                type: Varchar(256)
+            - column:
+                name: corporativeemail
+                type: Varchar(256)
+            - column:
+                name: role
+                type: Varchar(2)
+            - column:
+                name: isactive
+                type: Varchar(1)
+                constraints:
+                    nullable: false
+                defaultValue: 'A'
+            - column:
+                name: creationdate
+                type: Date
+                constraints:
+                    nullable: false
+                defaultValueComputed: current_timestamp
+            - column:
+                name: createdby
+                type: Varchar(25)
+                constraints:
+                    nullable: false
+                defaultValue: USER
+            - column:
+                name: lastupdate
+                type: Date
+            - column:
+                name: updateby
+                type: Varchar(25)
+        - createTable:
+            #schemaName: vetsystem
+            tableName: vet
+            remarks: Table to store vets information
+            columns:
+            - column:
+                name: vetid
+                type: Integer
+                autoIncrement: true
+                constraints:
+                    primaryKey: true
+                    primaryKeyName: vet_pk
+            - column:
+                name: employeeid
+                type: Integer
+                constraints:
+                    foreignKey:
+                      referencedColumnNames: employeeid
+                      referencedTableName: employee
+                    nullable: false
+            - column:
+                name: licenseid
+                type: Varchar(128)
+                constraints:
+                    nullable: false
+            - column:
+                name: licenseissuedby
+                type: Varchar(128)
+                constraints:
+                    nullable: false
+            - column:
+                name: licensetype
+                type: Varchar(128)
+                constraints:
+                    nullable: false
+            - column:
+                name: isactive
+                type: Varchar(1)
+                constraints:
+                    nullable: false
+                defaultValue: 'A'
+            - column:
+                name: creationdate
+                type: Date
+                constraints:
+                    nullable: false
+                defaultValueComputed: current_timestamp
+            - column:
+                name: createdby
+                type: Varchar(25)
+                constraints:
+                    nullable: false
+                defaultValue: USER
+            - column:
+                name: lastupdate
+                type: Date
+            - column:
+                name: updateby
+                type: Varchar(25)
+        - createTable:
+            #schemaName: vetsystem
+            tableName: owner
+            remarks: Table to store owners information
+            columns:
+            - column:
+                name: ownerid
+                type: Integer
+                autoIncrement: true
+                constraints:
+                    primaryKey: true
+                    primaryKeyName: owner_pk
+            - column:
+                name: name
+                type: Varchar(128)
+                constraints:
+                    nullable: false
+            - column:
+                name: surname
+                type: Varchar(128)
+                constraints:
+                    nullable: false
+            - column:
+                name: address1
+                type: Varchar(1024)
+            - column:
+                name: address2
+                type: Varchar(1024)
+            - column:
+                name: phonenumber1
+                type: Varchar(15)
+            - column:
+                name: phonenumber2
+                type: Varchar(15)
+            - column:
+                name: email
+                type: Varchar(254)
+            - column:
+                name: photo
+                type: BLOB
+            - column:
+                name: birthdate
+                type: Date
+            - column:
+                name: isactive
+                type: Varchar(1)
+                constraints:
+                    nullable: false
+                defaultValue: 'A'
+            - column:
+                name: creationdate
+                type: Date
+                constraints:
+                    nullable: false
+                defaultValueComputed: current_timestamp
+            - column:
+                name: createdby
+                type: Varchar(25)
+                constraints:
+                    nullable: false
+                defaultValue: USER
+            - column:
+                name: lastupdate
+                type: Date
+            - column:
+                name: updateby
+                type: Varchar(25)
+        - createTable:
+            #schemaName: vetsystem
+            tableName: pet
+            remarks: Table to store pets information
+            columns:
+            - column:
+                name: petid
+                type: Integer
+                autoIncrement: true
+                constraints:
+                    primaryKey: true
+                    primaryKeyName: pet_pk
+            - column:
+                name: ownerid
+                type: Integer
+                constraints:
+                    foreignKey:
+                      referencedColumnNames: ownerid
+                      referencedTableName: Owner
+                    nullable: false
+            - column:
+                name: name
+                type: Varchar(128)
+                constraints:
+                    nullable: false
+            - column:
+                name: animaltype
+                type: Varchar(128)
+                constraints:
+                    nullable: false
+            - column:
+                name: breedname
+                type: Varchar(128)
+            - column:
+                name: birthplace
+                type: Varchar(128)
+            - column:
+                name: birthdate
+                type: Date
+            - column:
+                name: photo
+                type: BLOB
+            - column:
+                name: isactive
+                type: Varchar(1)
+                constraints:
+                    nullable: false
+                defaultValue: 'A'
+            - column:
+                name: creationdate
+                type: Date
+                constraints:
+                    nullable: false
+                defaultValueComputed: current_timestamp
+            - column:
+                name: createdby
+                type: Varchar(25)
+                constraints:
+                    nullable: false
+                defaultValue: USER
+            - column:
+                name: lastupdate
+                type: Date
+            - column:
+                name: updateby
+                type: Varchar(25)
+        - createTable:
+            #schemaName: vetsystem
+            tableName: checkup
+            remarks: Table to store checkups information
+            columns:
+            - column:
+                name: checkupid
+                type: Integer
+                autoIncrement: true
+                constraints:
+                    primaryKey: true
+                    primaryKeyName: checkup_pk
+            - column:
+                name: vetid
+                type: Integer
+                constraints:
+                    foreignKey:
+                      referencedColumnNames: vetid
+                      referencedTableName: Vet
+                    nullable: false
+            - column:
+                name: checkupdate
+                type: Date
+            - column:
+                name: isactive
+                type: Varchar(1)
+                constraints:
+                    nullable: false
+                defaultValue: 'A'
+            - column:
+                name: creationdate
+                type: Date
+                constraints:
+                    nullable: false
+                defaultValueComputed: current_timestamp
+            - column:
+                name: createdby
+                type: Varchar(25)
+                constraints:
+                    nullable: false
+                defaultValue: USER
+            - column:
+                name: lastupdate
+                type: Date
+            - column:
+                name: updateby
+                type: Varchar(25)
+        - createTable:
+            #schemaName: vetsystem
+            tableName: checkupreport
+            remarks: Table to store checkupreports information
+            columns:
+            - column:
+                name: checkupreportid
+                type: Integer
+                autoIncrement: true
+                constraints:
+                    primaryKey: true
+                    primaryKeyName: checkupreport_pk
+            - column:
+                name: checkupid
+                type: Integer
+                constraints:
+                    foreignKey:
+                      referencedColumnNames: checkupid
+                      referencedTableName: checkup
+                    nullable: false
+            - column:
+                name: petid
+                type: Integer
+                constraints:
+                    foreignKey:
+                      referencedColumnNames: petid
+                      referencedTableName: pet
+                    nullable: false
+            - column:
+                name: reportnotes
+                type: BLOB
+            - column:
+                name: reportattachment
+                type: BLOB
+            - column:
+                name: isactive
+                type: Varchar(1)
+                constraints:
+                    nullable: false
+                defaultValue: 'A'
+            - column:
+                name: creationdate
+                type: Date
+                constraints:
+                    nullable: false
+                defaultValueComputed: current_timestamp
+            - column:
+                name: createdby
+                type: Varchar(25)
+                constraints:
+                    nullable: false
+                defaultValue: USER
+            - column:
+                name: lastupdate
+                type: Date
+            - column:
+                name: updateby
+                type: Varchar(25)

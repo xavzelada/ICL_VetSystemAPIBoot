@@ -1,0 +1,13 @@
+databaseChangeLog:
+    - changeSet:
+        id: DataSamplerCreation
+        author: xvasquez
+        changes:
+        - sql: "INSERT INTO company VALUES (1, 'Company Test 1', 'Address 1', NULL, 'A', '2019-10-15', 'postgres', NULL, NULL);"
+        - sql: "INSERT INTO branch VALUES (1, 1, 'Branch 1', 'Address branch 1', 'KZN', '22334455', NULL, 'A', '2019-10-15', 'postgres', NULL, NULL);"
+        - sql: "INSERT INTO employee VALUES (1, 1, 'Xavier ', 'Vasquez', NULL, '1991-03-14', 'Innopolis', '22334455', NULL, 'test@test.com', 'corporate@test.com', 'A', 'A', '2019-10-15', 'postgres', NULL, NULL);"
+        - sql: "INSERT INTO vet VALUES (1, 1, 'Lic 001', 'KZN', '1', 'A', '2019-10-15', 'postgres', NULL, NULL);"
+        - sql: "INSERT INTO owner VALUES (1, 'Xavier ', 'Vasquez', 'Address 1', NULL, '33445566', NULL, 'test@test.com', NULL, '1992-04-15', 'A', '2019-10-15', 'postgres', NULL, NULL);"
+        - sql: "INSERT INTO pet VALUES (1, 1, 'mamadou', '1', 'Great dane', 'SLV', '2016-12-10', NULL, 'A', '2019-10-15', 'postgres', NULL, NULL);"
+        - sql: "INSERT INTO checkup VALUES (1, 1, '2019-10-15', 'A', '2019-10-15', 'postgres', NULL, NULL);"
+        - sql: "INSERT INTO checkupreport VALUES (1, 1, 1, NULL, NULL, 'A', '2019-10-15', 'postgres', NULL, NULL);"

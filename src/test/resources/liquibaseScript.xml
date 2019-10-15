@@ -5,11 +5,13 @@
         xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-    
     <include file="liquibase/DBCreation.yml"/>
+    <include file="liquibase/DataSampler.yml"/>
+    <!--<includeAll relativeToChangelogFile="liquibase/"/>-->
+    
 <!--    <changeSet id="1" author="xvasquez">
         <comment>Creating DB for VetSystem</comment>
-        <sqlFile path="liquibase/DBCreation.sql" encoding="utf8" splitStatements="true" stripComments="true"/>
+        <sqlFile path="liquibase/DBCreation.yml" encoding="utf8" splitStatements="true" stripComments="true"/>
     </changeSet>-->
     
     

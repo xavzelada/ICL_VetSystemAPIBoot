@@ -1,53 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.VetSystem.RestAPI.config;
 
-import java.util.Properties;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Primary;
 
-/**
- * Hibernate Utility class with a convenient method to get Session Factory
- * object.
- *
- * @author DELL
- */
+@Configuration
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory;
-
-    static {
-        try {
-
-            Configuration cfg = new Configuration();
-            Properties p = new Properties();
-            //load properties file
-            p.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties"));
-            cfg.setProperties(p);
-            // build session factory
-            //SessionFactory factory = cfg.buildSessionFactory();
-            // get session
-            //Session session = factory.openSession();
-            //System.out.println(session.isConnected());
-            // close session
-            //session.close();
-            //System.out.println(session.isConnected());
-
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            //sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-            sessionFactory = cfg.buildSessionFactory();
-        } catch (Throwable ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
+    @Bean
+    @Primary
+    @ConfigurationProperties("spring.datasource")
+    public DataSourceProperties dataSourceProperties() {
+        return new DataSourceProperties();
     }
 
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
+    @Bean
+    @ConfigurationProperties("spring.datasource.configuration")
+    public HikariDataSource dataSource(DataSourceProperties properties) {
+        return properties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }
 }
